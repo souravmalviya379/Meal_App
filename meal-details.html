@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Details</title>
+    <style>
+        nav {
+            background-color: purple;
+            color: white;
+            height: 60px;
+            border-radius: 20px;
+            padding-left: 20px;
+        }
+
+        nav h1 {
+            display: inline-block;
+            margin-top: 0.7rem;
+            font-size: 2.1rem;
+        }
+
+        nav a {
+            display: inline-block;
+            position: absolute;
+            right: 25px;
+            font-size: 1.6rem;
+            margin-top: 1rem;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        #meal-details {
+            background-color: rgb(167, 103, 167);
+            width: 70%;
+            margin: 2rem auto;
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        img {
+            display: inline-block;
+            margin: 20px;
+            width: 40%;
+            border-radius: 30px;
+        }
+
+        .meal-info {
+            width: 40%;
+            display: inline-block;
+            margin-top: 100px;
+            margin-left: 150px;
+            vertical-align: top;
+            color: white;
+            font-weight: bolder;
+            font-family: cursive;
+            font-size: 2rem;
+        }
+
+        #meal-details span {
+            display: block;
+        }
+
+        a {
+            color: rgb(237, 227, 227);
+        }
+
+        a:hover {
+            color: rgb(217, 207, 260)
+        }
+
+        .meal-instructions {
+            color: rgb(236, 228, 228);
+            font-size: 1.2rem;
+            text-align: justify;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1>Meal App</h1>
+        <a href="favourites.html">Favourites</a>
+    </nav>
+
+    <div id="meal-details"></div>
+
+
+
+
+
+
+    <script>
+
+        let url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+        let value = localStorage.getItem('value');
+        fetchMealsWithId(url, value);
+
+        //fetching meals with id 
+        async function fetchMealsWithId(url, value) {
+            let xhrRequest = new XMLHttpRequest();
+
+            xhrRequest.open('get', url + value, true);
+            xhrRequest.send();
+
+            xhrRequest.onload = function () {
+                let meal = JSON.parse(xhrRequest.response).meals[0];
+                let meal_item = document.createElement('div');
+                meal_item.innerHTML = `
+                    <img src="${meal.strMealThumb}" alt=""/>
+                    <div class='meal-info'>
+                        <span class='meal-name'>Name: ${meal.strMeal} </span>
+                        <span class='meal-category'>Category: ${meal.strCategory} </span>    
+                        <span class='meal-area'>Area: ${meal.strArea} </span>
+                        <span><a href="${meal.strYoutube}">Video Guide</a></span>
+                    </div>
+                    <h3 style='color: white; margin: 10px;'>Instructions : </h3>
+                    <p class='meal-instructions'>${meal.strInstructions}</p>
+                `
+
+                document.getElementById('meal-details').append(meal_item);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
