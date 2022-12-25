@@ -22,14 +22,13 @@ async function fetchMealsWithName(url, value) {
             document.getElementById('meals').append(meal_item);
         }
     };
-
     xhrRequest.open('get', url + value, true);
     xhrRequest.send();
 }
 
 
 search.addEventListener('keyup', (e) => {
-    if (e.key == ' ' || e.key == 'Backspace' || e.key == 'Tab') {
+    if (e.key == ' ' || e.key == 'Tab') {
         //if this key's pressed don't search
         return;
     }
