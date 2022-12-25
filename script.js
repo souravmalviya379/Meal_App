@@ -32,6 +32,7 @@ search.addEventListener('keyup', (e) => {
         //if this key's pressed don't search
         return;
     }
+    document.getElementById('meals').innerHTML = "";
     let value = e.target.value;
     let url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
     fetchMealsWithName(url, value);
