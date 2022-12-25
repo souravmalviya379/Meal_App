@@ -139,14 +139,15 @@
             })();
         }
 
-        //adding event listener to button
         document.addEventListener('click', (e) => {
+            //adding event listener to 'More Details' button
             if (e.target.tagName == 'BUTTON') {
                 localStorage.setItem('value', e.target.id);
                 location.href = 'meal-details.html';
                 return;
             }
 
+            //adding event listener to 'heart' button
             if (e.target.className == 'fa-solid fa-heart heart') {
                 e.target.classList.add('favourite');
                 alert('Added to favorites');

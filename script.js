@@ -38,7 +38,7 @@ search.addEventListener('keyup', (e) => {
     fetchMealsWithName(url, value);
 })
 
-//adding event listener to favorites button
+//adding event listener to more-details button
 document.addEventListener('click', (e) => {
     if (e.target.tagName == 'BUTTON') {
         localStorage.setItem('value', e.target.id);
@@ -66,6 +66,7 @@ document.addEventListener('click', (e) => {
         return;
     }
 })
+
 
 document.getElementById('favourites').addEventListener('click', (e)=>{
     localStorage.setItem('favouritesList', favouritesList);
